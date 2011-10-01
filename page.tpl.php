@@ -34,6 +34,14 @@
         <?php if ($secondary_title){?><h1><?php print $secondary_title ?></h1><?php } ?>
         <?php if ($secondary_links){?><?php print quadro_primary_links($secondary_links) ?><?php } ?>
 			</div>
+
+			<!-- Header -->
+      <?php if ($header): ?>
+        <div class="header-region">
+          <?php print $header ?>
+        </div>
+      <?php endif; ?>
+			<!-- // Header -->
 		
 		</div>
 		<!-- // header -->

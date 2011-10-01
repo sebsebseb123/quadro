@@ -115,13 +115,30 @@ function quadro_form_element($element, $value) {
     }
   }
 
-  if (!empty($element['#description'])) {
-    $output .= ' <div class="description">'. $element['#description'] ."</div>\n";
+  if(($element['#type'] == 'checkbox') || ($element['#type'] == 'radio')){// check if the input type is a checkbox
+	  
+	  // if the input is a checkbox then output the label before the description
+	  $output .= " $value\n";
+
+	  if (!empty($element['#description'])) {
+		$output .= ' <div class="description">'. $element['#description'] ."</div>\n";
+	  }
+	  
+	  $output .= "</div>\n";
+	  
   }
+  
+  else{// all other input types output in the default way
 
-  $output .= " $value\n";
-
-  $output .= "</div>\n";
+	  if (!empty($element['#description'])) {
+		$output .= ' <div class="description">'. $element['#description'] ."</div>\n";
+	  }
+	  
+	  $output .= " $value\n";
+	
+	  $output .= "</div>\n";
+  
+  }
 
   return $output;
 }

@@ -1511,6 +1511,118 @@ fieldset.cmpn-field-select {
 }
 */
 
+html.js input.form-autocomplete{
+    background-position: 100% 9px;
+    background-repeat: no-repeat;
+}
+span.field-prefix + input[type="text"]{
+	min-width: 15%;
+	max-width: 25%;
+}
 
+div.oat-therm.oat-horizontal .progress{
+	background: #00C800;
+}
 
+table{
+	width: 100%;
+}
 
+tr.even > td.cmpn-fields-ex > div input[type="text"],
+tr.odd > td.cmpn-fields-ex > div input[type="text"],
+input[name*="campaign_fields["],
+input#edit-campaign-submit-text,
+input#edit-petition-display-opt-text,
+input#edit-thank-email-from,
+input#edit-thank-email-subject,
+input#edit-first-name,
+input#edit-last-name,
+input#edit-address,
+input#edit-city,
+input#edit-postal-code,
+input#edit-email{
+	/*width: 616px;*/
+	width: 250px;
+}
+
+select#edit-country,
+select#edit-province{
+	width: 261px;
+}
+
+input#edit-petition-pri-numrow,
+input#edit-petition-sec-numrow,
+input#edit-campaign-goal-end,
+input#edit-campaign-goal-start{
+	width: 100px;
+}
+
+input[name*="[description]"]{
+	width: 93%;
+}
+
+a.logo{
+	text-decoration: none;
+	font-weight: bold;
+	color: #f9f9f9;
+}
+
+body.front div.sub-header{
+	margin-top: 225px;
+}
+
+body.front div#views_slideshow_singleframe_teaser_section_slideshow-block_1{
+	/*background: url("../images/bg_showcase.png") no-repeat scroll center top transparent;*/
+}
+
+body.front div.slide-title,
+body.front div.slide-body,
+body.front div#views_slideshow_singleframe_pager_slideshow-block_1 a{
+	color: #fff;
+}
+
+body.front div#views_slideshow_singleframe_pager_slideshow-block_1 a{
+	padding: 1px 3px;
+	text-align: center;
+}
+
+body.front div.activeSlide a{
+	background: #1C6997;
+}
+
+body.front div.header-region{
+	width: 100%;
+}
+
+body.front div.slide-content{
+	width: 999px;
+	margin-top: 25px;
+}
+
+body.front div.slide-title h2{
+	color: #fff;
+	text-shadow: 0 1px 0 #323231;
+	font-size: 3em;
+}
+
+body.front div.slide-body{
+	width: 100%;
+}
+
+body.front div.slide-body{
+	width: 50%;
+}
+
+body.front .page-title{
+	display: none;
+}
+
+body.front div.image.slide-image{
+	float: right;
+	width: 50%;
+	text-align: center;
+	margin-top: -50px;
+}
+
+body.front div.image.slide-image img{
+}
