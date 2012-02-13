@@ -1,12 +1,12 @@
 <?php
 
 function quadro_preprocess_page(&$vars) {
-/*   Disable default CSS files  */
-  $css = $vars['css'];
-/*   unset($css['all']['module']['modules/system/system.css']); */
-  unset($css['all']['module']['modules/node/node.css']);
-/*   unset($css['all']['module']['modules/system/defaults.css']); */
-  $vars['styles'] = drupal_get_css($css);
+///*   Disable default CSS files  */
+//  $css = $vars['css'];
+///*   unset($css['all']['module']['modules/system/system.css']); */
+//  unset($css['all']['module']['modules/node/node.css']);
+///*   unset($css['all']['module']['modules/system/defaults.css']); */
+//  $vars['styles'] = drupal_get_css($css);
 
   $vars['ie6'] = FALSE;
   if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6.0') !== false)){
@@ -36,11 +36,11 @@ dsm($vars);
 }
 
 
-function quadro_preprocess_node(&$vars) {
-  if (isset($vars['field_secondary_title'][0]['content']) && isset($vars['title'])){
-    unset($vars['title']);
-  }
-}
+//function quadro_preprocess_node(&$vars) {
+//  if (isset($vars['field_secondary_title'][0]['content']) && isset($vars['title'])){
+//    unset($vars['title']);
+//  }
+//}
 
 function quadro_primary_links($links, $attributes = array('class' => 'nav')) {
   global $language;
@@ -94,65 +94,81 @@ function quadro_primary_links($links, $attributes = array('class' => 'nav')) {
   return $output;
 }
 
-function quadro_form_element($element, $value) {
+function quadro_form_element($variables) {
+  $element = &$variables['element'];
   // This is also used in the installer, pre-database setup.
   $t = get_t();
 
-  $output = '<div class="form-item"';
-  if (!empty($element['#id'])) {
-    $output .= ' id="'. $element['#id'] .'-wrapper"';
-  }
-  $output .= ">\n";
-  $required = !empty($element['#required']) ? '<span class="form-required" title="'. $t('This field is required.') .'">*</span>' : '';
+  // This function is invoked as theme wrapper, but the rendered form element
+  // may not necessarily have been processed by form_builder().
+  $element += array(
+    '#title_display' => 'before',
+  );
 
-  if (!empty($element['#title'])) {
-    $title = $element['#title'];
-    if (!empty($element['#id'])) {
-      $output .= ' <label for="'. $element['#id'] .'">'. $t('!title: !required', array('!title' => filter_xss_admin($title), '!required' => $required)) ."</label>\n";
-    }
-    else {
-      $output .= ' <label>'. $t('!title: !required', array('!title' => filter_xss_admin($title), '!required' => $required)) ."</label>\n";
-    }
+  // Add element #id for #type 'item'.
+  if (isset($element['#markup']) && !empty($element['#id'])) {
+    $attributes['id'] = $element['#id'];
+  }
+  // Add element's #type and #name as class to aid with JS/CSS selectors.
+  $attributes['class'] = array('form-item');
+  if (!empty($element['#type'])) {
+    $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
+  }
+  if (!empty($element['#name'])) {
+    $attributes['class'][] = 'form-item-' . strtr($element['#name'], array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
+  }
+  // Add a class for disabled elements to facilitate cross-browser styling.
+  if (!empty($element['#attributes']['disabled'])) {
+    $attributes['class'][] = 'form-disabled';
+  }
+  $output = '<div' . drupal_attributes($attributes) . '>' . "\n";
+
+  // If #title is not set, we don't display any label or required marker.
+  if (!isset($element['#title'])) {
+    $element['#title_display'] = 'none';
+  }
+  $prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
+  $suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
+
+  switch ($element['#title_display']) {
+    case 'before':
+    case 'invisible':
+      $output .= ' ' . theme('form_element_label', $variables);
+      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
+      break;
+
+    case 'after':
+      $output .= ' ' . $prefix . $element['#children'] . $suffix;
+      $output .= ' ' . theme('form_element_label', $variables) . "\n";
+      break;
+
+    case 'none':
+    case 'attribute':
+      // Output no label and no required marker, only the children.
+      $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
+      break;
   }
 
-  if(($element['#type'] == 'checkbox') || ($element['#type'] == 'radio')){// check if the input type is a checkbox
-	  
-	  // if the input is a checkbox then output the label before the description
-	  $output .= " $value\n";
-
-	  if (!empty($element['#description'])) {
-		$output .= ' <div class="description">'. $element['#description'] ."</div>\n";
-	  }
-	  
-	  $output .= "</div>\n";
-	  
+  if (!empty($element['#description'])) {
+    $output .= '<div class="description">' . $element['#description'] . "</div>\n";
   }
-  
-  else{// all other input types output in the default way
 
-	  if (!empty($element['#description'])) {
-		$output .= ' <div class="description">'. $element['#description'] ."</div>\n";
-	  }
-	  
-	  $output .= " $value\n";
-	
-	  $output .= "</div>\n";
-  
-  }
+  $output .= "</div>\n";
 
   return $output;
 }
 
-function quadro_button($element) {
-  // Make sure not to overwrite classes.
-  if (isset($element['#attributes']['class'])) {
-    $element['#attributes']['class'] = 'submit form-'. $element['#button_type'] .' '. $element['#attributes']['class'];
-  }
-  else {
-    $element['#attributes']['class'] = 'submit form-'. $element['#button_type'];
+function quadro_button($variables) {
+  $element = $variables['element'];
+  $element['#attributes']['type'] = 'submit';
+  element_set_attributes($element, array('id', 'name', 'value'));
+
+  $element['#attributes']['class'][] = 'form-' . $element['#button_type'];
+  if (!empty($element['#attributes']['disabled'])) {
+    $element['#attributes']['class'][] = 'form-button-disabled';
   }
 
-  return '<input type="'.$element['#button_type'].'" '. (empty($element['#name']) ? '' : 'name="'. $element['#name'] .'" ') .'id="'. $element['#id'] .'" value="'. check_plain($element['#value']) .'" '. drupal_attributes($element['#attributes']) ." />\n";
+  return '<input' . drupal_attributes($element['#attributes']) . ' />';
 }
 
 function quadro_captcha($element) {

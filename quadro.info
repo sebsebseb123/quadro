@@ -1,7 +1,7 @@
-; $Id$ 
 name = Quadro
-description = Quadro theme...now on Drupal!
-core = 6.x
+description = Quadro theme...now on Drupal 7!
+core = 7.x
+
 engine = phptemplate
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/screen.css
@@ -9,5 +9,9 @@ stylesheets[all][] = css/typography.css
 stylesheets[all][] = css/prettyPhoto.css
 stylesheets[all][] = font/stylesheet.css
 
-;scripts[] = sf/js/superfish.js
-
+regions[header] = Header
+regions[page_top] = Page Top
+regions[help] = Help
+regions[content] = Content
+regions[right] = Right
+regions[footer] = Footer

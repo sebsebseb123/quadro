@@ -1,21 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php print $language->language ?>" xml:lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
-<head>
-  <title><?php print $head_title ?></title>
-  <?php print $head ?>
-  <?php print $styles ?>
-  <?php print $scripts ?>
-  <?php if ($ie6) { ?>
-  <!--[if IE 6]>
-  <style type="text/css">
-  
-  </style>
-  <![endif]-->
-  <?php } ?>
-</head>
-
-<body class="<?php print $body_classes ?>">
-<!-- container -->
 <div class="container">
 
 	<!-- wrapper -->
@@ -27,18 +9,18 @@
 			
 			<div class="top-nav">
         <a class="logo" href="<?php print base_path() ?>" title="<?php print $site_name ?>"><!--img src="<?php print base_path() . path_to_theme(); ?>/logo.png" alt="<?php print $site_name ?>" title="<?php print $site_name ?>" /--><?php print $site_name ?></a>
-        <?php print quadro_primary_links($primary_links) ?>
+        <?php print quadro_primary_links($main_menu) ?>
 			</div>
 
 			<div class="page-title">
         <?php if ($secondary_title){?><h1><?php print $secondary_title ?></h1><?php } ?>
-        <?php if ($secondary_links){?><?php print quadro_primary_links($secondary_links) ?><?php } ?>
+        <?php if ($secondary_menu){?><?php print quadro_primary_links($secondary_menu) ?><?php } ?>
 			</div>
 
 			<!-- Header -->
-      <?php if ($header): ?>
+      <?php if ($page['header']): ?>
         <div class="header-region">
-          <?php print $header ?>
+          <?php print render($page['header']) ?>
         </div>
       <?php endif; ?>
 			<!-- // Header -->
@@ -52,24 +34,27 @@
 			<!-- content -->
 			<div class="content-top"></div>
 			<div class="content clearfix">
+
+      <?php if ($tabs): ?>
+        <div class="tabs">
+          <?php print render($tabs); ?>
+        </div>
+      <?php endif; ?>
 				
-        <?php if ($tabs): print '<div id="tabs-wrapper" class="clear-block">'; endif; ?>
-        <?php if ($tabs): print ''. $tabs .'</div>'; endif; ?>
-        <?php if ($tabs2): print '<ul class="tabs secondary">'. $tabs2 .'</ul>'; endif; ?>
         <?php if ($show_messages && $messages): print $messages; endif; ?>
-        <?php print $help; ?>
+        <?php print render($page['help']); ?>
 
 				<!-- left content -->
-				<div class="left-content<?php if ($right) { print ' has-sidebar'; } ?>">
-          <?php print $content ?>
+				<div class="left-content<?php if ($page['right']) { print ' has-sidebar'; } ?>">
+          <?php print render($page['content']) ?>
 				</div>
 				<!-- // left content -->
 			
 			
 				<!-- Sidebar -->
-        <?php if ($right): ?>
+        <?php if ($page['right']): ?>
           <div class="sidebar">
-            <?php print $right ?>
+            <?php print $page['right'] ?>
           </div>
         <?php endif; ?>
 				<!-- // Sidebar -->
@@ -87,7 +72,7 @@
 		<!-- footer -->
 		<div class="footer">						
 
-      <?php print $footer_message . $footer ?>
+      <?php print render($page['footer']) ?>
 
 		</div>
 		<!-- // footer -->
@@ -97,7 +82,3 @@
 	
 </div>
 <!-- // container -->
-<?php print $closure ?>
-</body>
-</html>
-
