@@ -1,3 +1,7 @@
+<?php
+dsm($variables);
+?>
+
 <div class="container">
 
 	<!-- wrapper -->
@@ -54,7 +58,7 @@
 				<!-- Sidebar -->
         <?php if ($page['right']): ?>
           <div class="sidebar">
-            <?php print $page['right'] ?>
+            <?php print render($page['right']) ?>
           </div>
         <?php endif; ?>
 				<!-- // Sidebar -->

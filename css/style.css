@@ -1359,7 +1359,8 @@ form input, form textarea {
 /* 	margin: 4px 0 13px 0; */
 	outline: none;
 	padding: 6px;
-	width: 92%; }
+	/*width: 92%;*/
+}
 
 form div.form-item {
   margin-top:0;
