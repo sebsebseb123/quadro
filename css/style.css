@@ -593,12 +593,14 @@ div.block h4, .testimonial h4 {
 	margin: 25px 0 0 0; }
 
 div.block p {
-	font-size: 12px; }
+	font-size: 14px;
+}
 
 div.block p.meta {
 	font-size: 12px;
 	margin:0;
-	padding:0; }
+	padding:0;
+}
 	
 div.block p.meta span {
 	font-weight: bold; }
