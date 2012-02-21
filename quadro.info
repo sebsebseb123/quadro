@@ -15,3 +15,6 @@ regions[help] = Help
 regions[content] = Content
 regions[right] = Right
 regions[footer] = Footer
+
+scripts[] = js/bigtext.js
+scripts[] = js/quadro.js

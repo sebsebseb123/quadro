@@ -69,22 +69,6 @@ div.block p.meta span {
 	.showcase #slider p a:hover {
 		background: #4aa3d7 url("../images/bg_button.png") repeat-x bottom center; }
 
-/* PAGE TITLE */
-.page-title {
-	background: transparent url("../images/bg_showcase.png") no-repeat top center; }
-
-.page-title h1 {
-	color:#fff;
-	text-shadow: 0 1px 0 #323231; }
-
-	.page-title ul.nav li a {
-		color:#fff;
-		letter-spacing:-0.7px;
-		text-shadow: 0 1px 0 #323231; }
-
-		.page-title ul.nav li a:hover, .page-title ul.nav li.current_page_item a {
-			color:#a9eaff;}
-
 
 /*	-------------------------------------------------------------
 	TABLES (PRICING)
@@ -139,7 +123,7 @@ li.rss {
 	FORM
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	*/
 
-form input.submit {
+form input.form-submit {
 	color:#fff;
 	border:1px solid #1c6997;
 	text-shadow: 1px 1px 0 #082848;

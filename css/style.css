@@ -727,45 +727,18 @@ div.col2 p {
 	-ms-border-radius: 5px; }
 
 /* PAGE TITLE */
-.page-title {
-	position: relative;
-	width: 999px;
+#page-title-wrapper {
+	width:980px;
 	height: 130px;
 	line-height: 130px;
-	margin:0; }
+}
 
-.page-title h1 {
+#page-title {
+	color:#fff;
+	text-shadow: 0 1px 0 #212121;
 	font-family: "Droid Sans Bold", sans-serif;
 	font-size:48px;
-	line-height: 130px; }
-
-.page-title ul.nav {
-	position:absolute;
-	top:27px;
-	right:0;
-	margin:0;
-	padding:0; }
-
-.page-title ul.nav li {
-	list-style-type:none;
-	position: relative;
-	float:left;
-	width:auto;
-	white-space:nowrap;
-	padding:0 5px !important;
-	background:transparent; }
-
-	.page-title ul.nav li a {
-		display:block;
-		font-size:1.3em;
-		font-weight: bold;
-		padding:0 10px;
-		text-transform: none;
-		background:transparent; }
-
-	.page-title ul.nav li a:hover {
-		background: none;
-		border-bottom: none; }
+}
 
 /* SCREENSHOTS */
 .boxgrid { 
@@ -1265,7 +1238,7 @@ div.messages {
   margin-bottom:2em;
 }
 
-#tabs-wrapper {
+.tabs {
   margin-bottom:2em;
 }
 
@@ -1278,10 +1251,15 @@ form li {
 	list-style-type: none; 
 	position:relative; }
 
-form fieldset {
+form fieldset.vertical-tabs-pane .fieldset-wrapper {
+	border:0;
+	background:0;
+}
+
+form fieldset .fieldset-wrapper, form fieldset.vertical-tabs-pane fieldset .fieldset-wrapper {
   border:1px solid #CCC;
-  margin:2em 0;
-  padding:0 2em 2em;
+  margin:0 0 2em 0;
+  padding:.5em 2em 1em;
   background: #F7F7F7;
 }
 
@@ -1290,6 +1268,10 @@ html.js form fieldset.collapsed {
   background:none;
   padding:0;
   margin:1em 0;
+}
+
+html.js fieldset.collapsible .fieldset-legend {
+  background-position-x:10px;
 }
 
 fieldset legend {
@@ -1306,31 +1288,40 @@ fieldset legend {
   position: relative;
   text-indent: 10px;
   text-shadow: 0 1px 0 #fff;
-  top: -12px;
+  top:5px;
   width: 100%;
-  -khtml-border-radius-topleft: 4px;
-  -moz-border-radius-topleft: 4px;
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -khtml-border-radius-topright: 4px;
-  -moz-border-radius-topright: 4px;
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-fieldset.form-wrapper .fieldset-wrapper {
-  padding:0 1em;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
 form .vertical-tabs fieldset legend {
-  top:10px;
+  top:12px;
 }
 
-/*
-form fieldset.collapsed legend{
-  margin-left:2em;
+
+/**
+ * CTools collapsible divs
+ */
+.ctools-collapsible-container .ctools-collapsible-handle, .ctools-collapsible-container .ctools-collapsible-content {
+  background:#FAFAFA;
+  border:1px solid #999;
 }
-*/
+
+.ctools-collapsible-container .ctools-collapsible-handle {
+  background:#E5E5E5;
+  padding:.5em 0;
+  margin-top:1em;
+}
+
+.ctools-collapsible-container .ctools-collapsible-content {
+  padding:1em;
+  margin-bottom:1em;
+}
+
+.ctools-collapsible-container .ctools-toggle {
+  padding:.5em 0;
+  background-position:center;
+}
 
 form .node-form .standard {
   margin-bottom:2em;
@@ -1360,8 +1351,16 @@ form input, form textarea {
 	font-size:100%;
 /* 	margin: 4px 0 13px 0; */
 	outline: none;
-	padding: 6px;
+	padding:3px;
 	/*width: 92%;*/
+}
+
+#field-ui-field-overview-form {
+	font-size:smaller;
+}
+
+#field-ui-field-overview-form input, #field-ui-field-overview-form textarea {
+	width:inherit;
 }
 
 form div.form-item {
@@ -1500,10 +1499,55 @@ form li.alert label {
     bottom:0;
   }
 
-/* fixes */
+/* table fixes */
+
+table {
+	/*border:1px solid #999;*/
+}
+
+thead tr {
+	background-color: #CCC;
+	padding:0.1em 0.6em;
+}
+
+th {
+  padding:.5em;
+	border: 1px solid #999;
+}
 
 td {
-  padding:1em;
+	border-bottom: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+  padding:.5em .75em;
+}
+
+td:first-child {
+	border-left: 1px solid #CCC;
+}
+
+tr:first-child td {
+	border-top: 1px solid #CCC;
+}
+
+tr.odd, tr.even {
+	border:0;
+}
+
+tr.odd {
+	background-color:#E9E9E9;
+}
+
+table.field-ui-overview tr.add-new .label-input {
+	float:none;
+}
+
+/* Fix for "add another table" */
+form .form-item .field-multiple-table th.field-label {
+	padding-left:1em;
+}
+
+form .form-item .field-multiple-table th.field-label label {
+	margin:0;
 }
 
 /* cmpn page */
