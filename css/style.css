@@ -1280,7 +1280,7 @@ fieldset legend {
   border-bottom: none;
   color: #3b3b3b;
   display: block;
-  height: 2em;
+  height: 2.5em;
   left: -1px; /* LTR */
   font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, sans-serif;
   line-height: 2;
@@ -1292,6 +1292,10 @@ fieldset legend {
   width: 100%;
   -moz-border-radius: 4px;
   border-radius: 4px;
+}
+
+fieldset legend .fieldset-legend {
+	font-size:larger;
 }
 
 form .vertical-tabs fieldset legend {
@@ -1700,4 +1704,16 @@ body.front div.image.slide-image{
 }
 
 body.front div.image.slide-image img{
+}
+
+
+/* Temp styles? */
+#citcon-supporter {
+	float:right;
+	width:465px;
+}
+
+.field.field-name-body {
+	float:left;
+	width:400px;
 }
