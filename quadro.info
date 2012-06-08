@@ -18,3 +18,4 @@ regions[footer] = Footer
 
 scripts[] = js/bigtext.js
 scripts[] = js/quadro.js
+scripts[] = js/tooltips.js

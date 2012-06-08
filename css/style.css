@@ -1708,7 +1708,7 @@ body.front div.image.slide-image img{
 
 
 /* Temp styles? */
-#citcon-supporter {
+/*#citcon-supporter {
 	float:right;
 	width:465px;
 }
@@ -1716,4 +1716,13 @@ body.front div.image.slide-image img{
 .field.field-name-body {
 	float:left;
 	width:400px;
+}
+*/
+.campaign-2-col-left {
+	float:left;
+	width:450px;
+}
+.campaign-2-col-right {
+	float:right;
+	width:450px;
 }
